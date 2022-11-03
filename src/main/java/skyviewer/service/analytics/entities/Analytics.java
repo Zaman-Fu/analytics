@@ -22,6 +22,8 @@ public class Analytics {
 	String popularOrigin;
 	@Column
 	Float totalFare;
+	
+	public Analytics() {}
 	public Analytics(Long id, Long visits, Long reservations, String popularDestination, String popularOrigin,
 			Float totalFare) {
 		super();

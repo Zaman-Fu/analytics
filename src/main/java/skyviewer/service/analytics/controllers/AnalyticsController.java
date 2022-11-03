@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import skyviewer.service.analytics.entities.Analytics;
@@ -17,10 +18,11 @@ public class AnalyticsController {
 
 	@Autowired
 	AnalyticsService service;
+	
 	@GetMapping("analytics")
 	public ResponseEntity<Analytics> GetAnalytics()
 	{
-		Analytics analytics=service.getAnalytics();
+		Analytics analytics=service.getAnalytics().get();
 		
 		if(analytics==null)
 		{
@@ -29,6 +31,7 @@ public class AnalyticsController {
 		return new ResponseEntity<>(analytics,HttpStatus.OK);
 		
 	}
+	
 	@PatchMapping("analytics/visitors")
 	public ResponseEntity<Analytics> PatchVisitorCount()
 	{
@@ -41,7 +44,7 @@ public class AnalyticsController {
 	}
 	
 	@PatchMapping("analytics/reservations")
-	public ResponseEntity<Analytics> PatchReservationCount(int amountToAdd)
+	public ResponseEntity<Analytics> PatchReservationCount(@RequestBody int amountToAdd)
 	{
 		Analytics analytics=service.updateReservationCount(amountToAdd);
 		if(analytics==null)
@@ -51,8 +54,8 @@ public class AnalyticsController {
 		return new ResponseEntity<>(analytics,HttpStatus.OK);
 	}
 	
-	@PatchMapping("analytics/visitors")
-	public ResponseEntity<Analytics> PatchFareAmount(float amountToAdd)
+	@PatchMapping("analytics/fares")
+	public ResponseEntity<Analytics> PatchFareAmount(@RequestBody float amountToAdd)
 	{
 		Analytics analytics=service.updateFareTotal(amountToAdd);
 		if(analytics==null)
@@ -63,7 +66,7 @@ public class AnalyticsController {
 	}
 	
 	@PatchMapping("analytics/destination")
-	public ResponseEntity<Analytics> PatchPopularDestination(String mostPopular)
+	public ResponseEntity<Analytics> PatchPopularDestination(@RequestBody String mostPopular)
 	{
 		Analytics analytics=service.updatePopularDestination(mostPopular);
 		if(analytics==null)
@@ -74,7 +77,7 @@ public class AnalyticsController {
 	}
 	
 	@PatchMapping("analytics/origin")
-	public ResponseEntity<Analytics> PatchPopularOrigin(String mostPopular)
+	public ResponseEntity<Analytics> PatchPopularOrigin(@RequestBody String mostPopular)
 	{
 		Analytics analytics=service.updatePopularOrigin(mostPopular);
 		if(analytics==null)
