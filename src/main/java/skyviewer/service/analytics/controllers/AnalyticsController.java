@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import skyviewer.service.analytics.entities.Analytics;
 import skyviewer.service.analytics.services.AnalyticsService;
 
+///TODO:In retrospect, this one object analytics is terrible,
+///And it should be altered so as not to need to have to fetch information from the other two services
+///Such that there are actually two entities, one counting total visits, and the other keeping track of reservation entries anonymously
+///Such as: how many passengers booked with each operation, heading where, and maybe the time the operation was made.
+///Will implement it the right way assuming time allows
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnalyticsController {
