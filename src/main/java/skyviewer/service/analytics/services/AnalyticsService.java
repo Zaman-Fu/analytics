@@ -59,4 +59,9 @@ public class AnalyticsService {
 		return analytics;
 	}
 
+	public Analytics getAnalyticsComposite() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

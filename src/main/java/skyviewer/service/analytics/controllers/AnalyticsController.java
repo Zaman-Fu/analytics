@@ -18,6 +18,8 @@ import skyviewer.service.analytics.services.AnalyticsService;
 ///Such as: how many passengers booked with each operation, heading where, and maybe the time the operation was made.
 ///Will implement it the right way assuming time allows
 
+///Thought: The analytics entity doesn´t even need to be on the database actually...it can just be a composite other services build.
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnalyticsController {
@@ -28,8 +30,8 @@ public class AnalyticsController {
 	@GetMapping("analytics")
 	public ResponseEntity<Analytics> GetAnalytics()
 	{
-		Analytics analytics=service.getAnalytics().get();
-		
+		//Analytics analytics=service.getAnalytics().get();
+		Analytics analytics=service.getAnalyticsComposite();
 		if(analytics==null)
 		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -70,6 +72,11 @@ public class AnalyticsController {
 		}
 		return new ResponseEntity<>(analytics,HttpStatus.OK);
 	}
+	
+	
+	
+	
+	///These two  patch calls below shall be dummy data for now. No use calling them
 	
 	@PatchMapping("analytics/destination")
 	public ResponseEntity<Analytics> PatchPopularDestination(@RequestBody String mostPopular)
